@@ -1,4 +1,4 @@
-package com.example.shop.controller;
+package com.priya.shop.controller;
 
 import org.springframework.lang.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,19 +8,28 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
-import com.example.shop.entity.InventoryItem;
-import com.example.shop.entity.CartItem;
-import com.example.shop.service.CartService;
+
+import com.priya.shop.entity.CartItem;
+import com.priya.shop.entity.InventoryItem;
+import com.priya.shop.service.CartService;
+
 import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/cart")
+@RequestMapping("/")
 public class CartController {
 
     @Autowired
     private CartService service;
+    
 
+    @GetMapping("/")
+    public String Cart() {
+        return "redirect:/inventory";
+    }
+   
+    
     @GetMapping("/add")
     public String addItemPage(Model model) {
         model.addAttribute("item", new InventoryItem());
@@ -31,7 +40,7 @@ public class CartController {
     public String addItem(@ModelAttribute @NonNull InventoryItem item, RedirectAttributes redirectAttributes) {
         service.addToInventory(item);
         redirectAttributes.addFlashAttribute("success", "Item added to inventory successfully!");
-        return "redirect:/cart/inventory";
+        return "redirect:/inventory";
     }
 
     @GetMapping("/inventory")
@@ -58,7 +67,7 @@ public class CartController {
     public String updateItem(@ModelAttribute @NonNull InventoryItem item, RedirectAttributes redirectAttributes) {
         service.updateInventoryItem(item);
         redirectAttributes.addFlashAttribute("success", "Item updated successfully!");
-        return "redirect:/cart/inventory";
+        return "redirect:/inventory";
     }
 
     // --- 3. INVENTORY ACTIONS ---
@@ -66,14 +75,14 @@ public class CartController {
     @GetMapping("/delete/{id}")
     public String deleteItem(@PathVariable int id) {
         service.deleteInventoryItem(id);
-        return "redirect:/cart/inventory";
+        return "redirect:/inventory";
     }
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable int id, RedirectAttributes redirectAttributes) {
         service.addItemToCart(id, 1);
         redirectAttributes.addFlashAttribute("success", "Item added to cart!");
-        return "redirect:/cart/inventory";
+        return "redirect:/inventory";
     }
 
     @PostMapping("/addToCart")
@@ -84,7 +93,7 @@ public class CartController {
         } catch (IllegalArgumentException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
-        return "redirect:/cart/inventory";
+        return "redirect:/inventory";
     }
 
     // --- 4. CART & BILL VIEWS/ACTIONS ---
@@ -121,6 +130,6 @@ public class CartController {
         service.finalizeTransaction(selectedItems);
         service.clearCart(selectedItems);
 
-        return "redirect:/cart/inventory";
+        return "redirect:/inventory";
     }
 }

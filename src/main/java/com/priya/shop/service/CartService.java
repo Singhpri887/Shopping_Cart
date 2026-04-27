@@ -1,4 +1,4 @@
-package com.example.shop.service;
+package com.priya.shop.service;
 
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,11 @@ import java.util.Objects;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import com.example.shop.entity.InventoryItem;
-import com.example.shop.entity.CartItem;
-import com.example.shop.repository.InventoryRepository;
-import com.example.shop.repository.CartItemRepository;
+
+import com.priya.shop.entity.CartItem;
+import com.priya.shop.entity.InventoryItem;
+import com.priya.shop.repository.CartItemRepository;
+import com.priya.shop.repository.InventoryRepository;
 
 @Service
 public class CartService {

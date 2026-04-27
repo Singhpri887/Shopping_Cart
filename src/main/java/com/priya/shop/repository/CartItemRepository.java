@@ -1,9 +1,10 @@
-package com.example.shop.repository;
+package com.priya.shop.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.shop.entity.CartItem;
+
+import com.priya.shop.entity.CartItem;
 
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     Optional<CartItem> findByInventoryItemId(Integer inventoryItemId);

@@ -1,7 +1,8 @@
-package com.example.shop.repository;
+package com.priya.shop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.shop.entity.InventoryItem;
+
+import com.priya.shop.entity.InventoryItem;
 
 public interface InventoryRepository extends JpaRepository<InventoryItem, Integer> {
 }
