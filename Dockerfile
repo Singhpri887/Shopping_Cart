@@ -13,6 +13,6 @@ WORKDIR /app
 
 COPY --from=builder /app/target/*.jar app.jar
 
-EXPOSE 1010
+EXPOSE 1011
 
 ENTRYPOINT ["java","-jar","app.jar"]
